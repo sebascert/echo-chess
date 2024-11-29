@@ -19,7 +19,3 @@ EncodedPosition::EncodedPosition(EncPos pos)
 
 EncodedPosition::EncodedPosition() : coordX(0), coordY(0) {
 }
-
-EncodedMovement::EncodedMovement(EncodedPosition origin, EncodedPosition dest)
-    : distX(dest.coordX - origin.coordX), distY(dest.coordY - origin.coordY) {
-}

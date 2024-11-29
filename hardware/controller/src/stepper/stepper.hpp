@@ -12,10 +12,36 @@
 #define STEPPER_STEP_Y 19
 #define LIMIT_SWITCH_Y 18
 
+// vars (distance in mm)
+
+constexpr double STEPS_PER_REV = 200;  // step
+constexpr double MICROSTEPPING = 1;
+constexpr double DISPLACEMENT_PER_REV = 32;  // mm
+constexpr double STEPS_PER_MM =
+    STEPS_PER_REV * MICROSTEPPING / DISPLACEMENT_PER_REV;
+
+constexpr double SPEED = 100;  // mm/s
+
+constexpr double MSEC = 1e6;  // micro seconds
+
+constexpr double STEP_DELAY = MSEC / (STEPS_PER_MM * SPEED);
+constexpr double STEP_DELAY_HALF = STEP_DELAY / (double)2;
+
+#define NODE_DIST 400
+#define SAFE_DIST 200
+
+#define MAX_COORD_X 9
+#define MAX_COORD_Y 9
+
 typedef uint8_t Coord;
+typedef int Dist;
 
 void SetupMotorPins();
 
+// moves from origin board position to dest board position
 void MovePiece(Coord originX, Coord originY, Coord destX, Coord destY);
+
+// moves from current position to xy vector
+void VectorMove(Dist x, Dist y);
 
 #endif  // CONTROLLER_STEPPER_H

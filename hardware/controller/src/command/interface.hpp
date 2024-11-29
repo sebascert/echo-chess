@@ -90,13 +90,4 @@ struct EncodedPosition {
     explicit EncodedPosition(EncPos pos);
 };
 
-// encoded movement, represents signed distances between positions
-struct EncodedMovement {
-    // signed distances between the two positions
-    EncMov distX : COORD_BIT_SIZE + 1;
-    EncMov distY : COORD_BIT_SIZE + 1;
-
-    EncodedMovement(EncodedPosition origin, EncodedPosition dest);
-};
-
 #endif  // CONTROLLER_COMMAND_INTERFACE_H
