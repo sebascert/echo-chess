@@ -11,3 +11,6 @@ void SetupMotorPins() {
     pinMode(STEPPER_STEP_Y, INPUT);
     pinMode(LIMIT_SWITCH_Y, INPUT_PULLUP);
 }
+
+void MovePiece(Coord originX, Coord originY, Coord destX, Coord destY) {
+}

@@ -18,6 +18,8 @@ class AvailableCommand : public Command {
     CommandId command;
 
    public:
+    static const bool enabled = true;
+
     AvailableCommand() = default;
     CommandResponse Execute();
     CommandResponse Parse(String args);
@@ -28,6 +30,10 @@ class MovementCommand : public Command {
     EncodedPosition dest;
 
    public:
+    static const bool enabled = true;
+
+    bool skip = false;
+
     MovementCommand() = default;
     CommandResponse Execute();
     CommandResponse Parse(String args);
@@ -35,6 +41,8 @@ class MovementCommand : public Command {
 
 class ClearMovementsCommand : public Command {
    public:
+    static const bool enabled = true;
+
     ClearMovementsCommand() = default;
     CommandResponse Execute();
     CommandResponse Parse(String args);
@@ -44,6 +52,8 @@ class PrintCommand : public Command {
     String content;
 
    public:
+    static const bool enabled = true;
+
     PrintCommand() = default;
     CommandResponse Execute();
     CommandResponse Parse(String args);

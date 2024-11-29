@@ -1,3 +1,4 @@
+#include <cstdint>
 #ifndef CONTROLLER_STEPPER_H
 #define CONTROLLER_STEPPER_H
 
@@ -11,7 +12,10 @@
 #define STEPPER_STEP_Y 19
 #define LIMIT_SWITCH_Y 18
 
+typedef uint8_t Coord;
+
 void SetupMotorPins();
-// TODO
+
+void MovePiece(Coord originX, Coord originY, Coord destX, Coord destY);
 
 #endif  // CONTROLLER_STEPPER_H
