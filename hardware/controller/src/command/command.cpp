@@ -2,6 +2,7 @@
 #include "handler.hpp"
 #include "interface.hpp"
 #include "src/display/display.hpp"
+#include "src/electromagnet/electromagnet.hpp"
 #include "src/stepper/stepper.hpp"
 
 CommandResponse AvailableCommand::Execute() {
@@ -32,7 +33,13 @@ CommandResponse MovementCommand::Execute() {
         return CommandResponse::SKIPPED;
     }
 
-    MovePiece(origin.coordX, origin.coordY, dest.coordX, dest.coordY);
+    MoveToCoord(origin.coordX, origin.coordY);
+
+    ElectromagnetSet(true);
+
+    MoveToCoordInMagnetLine(dest.coordX, dest.coordY);
+
+    ElectromagnetSet(false);
 }
 CommandResponse MovementCommand::Parse(String args) {
     origin = EncodedPosition(args[0]);

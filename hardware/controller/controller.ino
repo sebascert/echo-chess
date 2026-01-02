@@ -1,7 +1,12 @@
 #include "src/command/handler.hpp"
+#include "src/electromagnet/electromagnet.hpp"
 #include "src/serial/serial.hpp"
+#include "src/stepper/stepper.hpp"
 
 void setup() {
+    SetupMotor();
+    SetupElectromagnet();
+
     Serial.println("hardware program started execution");
 
     SerialSetup();

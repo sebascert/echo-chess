@@ -3,6 +3,8 @@
 
 #include "WString.h"
 
+#include <LiquidCrystal.h>
+
 bool DisplayAvailable();
 void PrintToDisplay(String content);
 

@@ -3,7 +3,7 @@
 
 #define ELECTROMAGNET_SIG 32
 
-void SetupElectromagnetPins();
+void SetupElectromagnet();
 void ElectromagnetSet(bool state);
 
 #endif  // CONTROLLER_ELECTROMAGNET_H

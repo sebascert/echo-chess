@@ -2,7 +2,7 @@
 
 #include "electromagnet.hpp"
 
-void SetupElectromagnetPins() {
+void SetupElectromagnet() {
     pinMode(ELECTROMAGNET_SIG, OUTPUT);
 }
 

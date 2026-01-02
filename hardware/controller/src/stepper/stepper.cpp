@@ -2,7 +2,12 @@
 
 #include "stepper.hpp"
 
-void SetupMotorPins() {
+Dist currX;
+Dist currY;
+Coord coordX;
+Coord coordY;
+
+void SetupMotor() {
     pinMode(STEPPER_DIR_X, OUTPUT);
     pinMode(STEPPER_STEP_X, INPUT_PULLUP);
     pinMode(LIMIT_SWITCH_X, INPUT);
@@ -10,12 +15,8 @@ void SetupMotorPins() {
     pinMode(STEPPER_DIR_Y, OUTPUT);
     pinMode(STEPPER_STEP_Y, INPUT);
     pinMode(LIMIT_SWITCH_Y, INPUT_PULLUP);
-}
 
-Dist currX;
-Dist currY;
-
-void InitializePosition() {
+    // initialize position
     currX = 0;
     currY = 0;
 
@@ -33,20 +34,26 @@ void InitializePosition() {
     }
 }
 
-void MovePiece(Coord originX, Coord originY, Coord destX, Coord destY) {
-    Dist originX_dist = NODE_DIST * originX;
-    Dist originY_dist = NODE_DIST * originY;
-    Dist destX_dist = NODE_DIST * destX;
-    Dist destY_dist = NODE_DIST * destY;
+void AxisMove(Dist dist, uint8_t dir_pin, uint8_t step_pin);
 
-    VectorMove(originX_dist - currX, originY_dist - currY);
-    VectorMove(-SAFE_DIST, -SAFE_DIST);
-    VectorMove(destX_dist-SAFE_DIST, 0);
-    VectorMove(0, destY_dist);
-    VectorMove(SAFE_DIST, -0);
+void MoveToCoord(Coord x, Coord y) {
+    AxisMove((NODE_DIST * x) - currX, STEPPER_DIR_X, STEPPER_STEP_X);
+    AxisMove((NODE_DIST * y) - currY, STEPPER_DIR_Y, STEPPER_STEP_X);
+
+    coordX = x;
+    coordY = y;
 }
 
-void AxisMove(Dist dist, uint8_t dir_pin, uint8_t step_pin);
+void MoveToCoordInMagnetLine(Coord x, Coord y) {
+    // move to magnet line, left botoom corner of square
+    VectorMove(-SAFE_DIST, -SAFE_DIST);
+    // move to dest y magnet line
+    VectorMove((NODE_DIST * (x - currX)), 0);
+    // move to dest x line
+    VectorMove(0, (NODE_DIST * (x - currX)) + SAFE_DIST);
+    // move to dest y line
+    VectorMove(SAFE_DIST, 0);
+}
 
 void VectorMove(Dist x, Dist y) {
     AxisMove(x, STEPPER_DIR_X, STEPPER_STEP_X);

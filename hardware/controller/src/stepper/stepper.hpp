@@ -36,12 +36,12 @@ constexpr double STEP_DELAY_HALF = STEP_DELAY / (double)2;
 typedef uint8_t Coord;
 typedef int Dist;
 
-void SetupMotorPins();
+void SetupMotor();
 
-// moves from origin board position to dest board position
-void MovePiece(Coord originX, Coord originY, Coord destX, Coord destY);
+// move to origin
+void MoveToCoord(Coord x, Coord y);
 
-// moves from current position to xy vector
-void VectorMove(Dist x, Dist y);
+// move to destination in magnet line
+void MoveToCoordInMagnetLine(Coord x, Coord y);
 
 #endif  // CONTROLLER_STEPPER_H
